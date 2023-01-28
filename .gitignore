@@ -7,7 +7,6 @@
 
 .env
 .prettierrc.js
-bin/*
 dist
 *.DS_store
 binance-api.json
