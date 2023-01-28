@@ -1,0 +1,57 @@
+{
+  "name": "nawwa-scalper-terminal",
+  "packageManager": "yarn@3.2.3",
+  "scripts": {
+    "build": "NODE_ENV=production tsc -p tsconfig.build.json",
+    "package": "yarn build && pkg .",
+    "start": "ts-node -r ./tsconfig.paths -r dotenv/config --files ./src/index.ts"
+  },
+  "bin": "dist/index.js",
+  "pkg": {
+    "scripts": "build/**/*.js",
+    "assets": [
+      "node_modules/figlet/fonts/Standard.flf"
+    ],
+    "targets": [
+      "node16-win-x64",
+      "node16-macos-x64",
+      "node16-linux-x64"
+    ],
+    "outputPath": "./bin"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.191",
+    "@types/prompt-sync-history": "^1.0.1",
+    "binance": "^2.2.10",
+    "bluebird": "^3.7.2",
+    "bybit-api": "^3.3.9",
+    "chalk": "4.0.0",
+    "commander": "^9.5.0",
+    "figlet": "^1.5.2",
+    "lodash": "^4.17.21",
+    "node-emoji": "^1.11.0",
+    "prompt-sync": "^4.2.0",
+    "prompt-sync-history": "^1.0.1",
+    "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.38",
+    "@types/figlet": "^1.5.5",
+    "@types/node": "^18.11.18",
+    "@types/node-emoji": "^1.8.2",
+    "@types/prompt-sync": "^4.2.0",
+    "@types/yargs": "^17.0.19",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "pkg": "^5.8.0",
+    "prettier": "^2.8.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.9.4"
+  }
+}

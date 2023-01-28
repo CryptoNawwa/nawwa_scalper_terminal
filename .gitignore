@@ -5,7 +5,8 @@
 !.yarn/sdks
 !.yarn/versions
 
-
+.env
+.prettierrc.js
 bin/*
 dist
 *.DS_store
@@ -16,7 +17,6 @@ tmp
 .tmp
 tmp/*
 .env
-*.json
 .editorconfig
 node_modules
 .yarn
