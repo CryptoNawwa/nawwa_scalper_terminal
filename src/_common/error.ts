@@ -1,18 +1,18 @@
 import { logger } from '../logger';
 
-export class ScalperError extends Error {
+export class TerminalError extends Error {
   readonly variables?: Record<string, string | number>;
 
   constructor(message: string, variables?: Record<string, string | number>) {
     super(message);
 
     this.variables = variables;
-    this.name = 'ScalperError';
+    this.name = 'TerminalError';
   }
 }
 
 export const handleError = (err: unknown) => {
-  if (err instanceof ScalperError) {
+  if (err instanceof TerminalError) {
     logger.error(`Error : ${err.message}`);
     return;
   }

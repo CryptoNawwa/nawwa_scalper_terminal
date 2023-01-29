@@ -104,6 +104,9 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "rootDir": "./src",
     "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
     "typeRoots": ["./node_modules/@types"],
     "types": ["node"],
     "outDir": "./dist"

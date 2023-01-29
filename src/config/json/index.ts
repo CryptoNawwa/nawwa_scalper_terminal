@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { APP_PATH } from '../../_common/const';
 import { logger } from '../../logger';
-import { ScalperError } from '../../_common/error';
+import { TerminalError } from '../../_common/error';
 
 export interface Json {
   [key: string]: string;
@@ -29,7 +29,7 @@ export class JSONSync {
       fs.writeFileSync(this.path, JSON.stringify(this.data));
     } catch (err) {
       logger.error(`Could not create file ${this.name} at ${this.path}`);
-      throw new ScalperError(JSONSyncErrorReason.CANNOT_CREATE_FILE);
+      throw new TerminalError(JSONSyncErrorReason.CANNOT_CREATE_FILE);
     }
   }
 
@@ -45,7 +45,7 @@ export class JSONSync {
       this.data = { ...data, ...newData };
     } catch (err) {
       logger.error(`Cannot not update file ${this.name} with ${newData}`);
-      throw new ScalperError(JSONSyncErrorReason.CANNOT_UPDATE_FILE);
+      throw new TerminalError(JSONSyncErrorReason.CANNOT_UPDATE_FILE);
     }
   }
 

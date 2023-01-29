@@ -1,9 +1,8 @@
 import { emoji } from 'node-emoji';
 import * as Readline from 'node:readline';
 import { logger } from './logger';
-import { autocomplete } from './scalper/autocomplete';
-import { Engine } from './scalper/engine/index';
-import { ENGINE_RETURN } from './scalper/engine/types';
+import { autocomplete } from './helper/autocomplete';
+import { Engine, ENGINE_RETURN } from './terminal';
 import { printFiglet } from './helper/printFiglet';
 import chalk from 'chalk';
 
