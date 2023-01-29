@@ -1,11 +1,14 @@
 # Nawwa Scalper Terminal
 
+####
+
 This CLI is a textual UI (TUI) terminal tool, it's goal is to automate certain action when you are trading / scalping, aka : place scale orders, auto-limit order, cancel orders, shortcuts..
 
-This repository is a re-write of my first project [nawwa-scalper-tool](https://github.com/CryptoNawwa/nawwa_scalper_tool) which was done in Python (meh).
+This repository is a re-write of the previous tool [nawwa-scalper-tool](https://github.com/CryptoNawwa/nawwa_scalper_tool) which was written in Python (meh).
+
 This version is fully written in Typescript 🚀
 
-Also **NawwaScalperTerminal** now supports the **Bybit** & **Binance** exchanges !
+Also, the **Nawwa Scalper Termina** now supports the **Bybit** & **Binance** exchanges !
 
 > Note: The code was made so it's easy for a developer to implement any new exchange
 
@@ -56,13 +59,14 @@ launch auto take profit
 
 You can download the `nawwa-scalper-terminal` app directly from here :
 
-[Windows](./bin/nawwa-scalper-terminal-win.exe)
-[MacOs](./bin/nawwa-scalper-terminal-macos)
-[Linux](./bin/nawwa-scalper-terminal-linux) - (not tested yet)
+- [Windows](https://github.com/CryptoNawwa/nawwa_scalper_terminal/raw/main/bin/nawwa-scalper-terminal-win.exe)
+- [MacOs](https://github.com/CryptoNawwa/nawwa_scalper_terminal/raw/main/bin/nawwa-scalper-terminal-macos)
+- [Linux](https://github.com/CryptoNawwa/nawwa_scalper_terminal/raw/main/bin/nawwa-scalper-terminal-linux) - (not tested yet)
 
 If you are familiar with our beloved friend [Ichibot](https://gitlab.com/Ichimikichiki/ichibot-client-app), this is just like it, I will shamelessly copy-past some of his instructions :
 
-**Extra Steps on MacOS or Linux**
+#### **Extra Steps on MacOS or Linux**
+
 Open a terminal and and navigate to wherever you put the `nawwa-scalper-terminal`
 
 - `cd Downloads` (Or whatever directory `nawwa-scalper-terminal` is in)
@@ -77,7 +81,7 @@ Then:
   or for linux:
 - type: `./nawwa-scalper-terminal-linux`
 
-**Extra Steps on Windows**
+#### **Extra Steps on Windows**
 
 **Strongly recommended** : Install the terminal called [ Windows Terminal ](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701), the `nawwa-scalper-terminal` has some cool emojies and colors, they might not work in basic terminal.
 
