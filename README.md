@@ -173,6 +173,17 @@ _Note : Shortcut are used by the `atp` command, see later._
 
 # Availables commands
 
+- `help`
+- `connect`
+- `disconnect`
+- `switch`
+- `scale`
+- `atp`
+- `position`
+- `shortcut`
+- `cancel`
+- `ticker`
+
 You can type `help` in the app and it will display the list of all available commands and how to use it.
 
 If you want to see more detail about a certain command you can type `help <command_name>` and it will display a detailed description with examples :
@@ -186,6 +197,40 @@ Examples:
 - 'scale 10 0.1 0.2' -> Will create 10 reduce-only orders on the active ticker, from 0.1% to 0.2% away from the entry price
 - 'scale 2 0.5 0.8' -> Will create 2 reduce-only orders on the active ticker, from 0.5% to 0.8% away from the entry price
 ```
+
+---
+
+### **connect [binance | bybit]**
+
+This command will connect to the given exchange
+
+```sh
+
+> connect binance
+
+or
+
+> connect bybit
+
+```
+
+Whenever there is no `bybit-api.json` or `binance-api.json` file, the terminal will ask you to enter your API and secret keys, it will then store the keys in a file.
+
+Next time you use the command it will automatically use the keys from the file and connect to the exchange.
+
+---
+
+### **disconnect**
+
+This command will disconnect from the current active exchange
+
+```sh
+
+> disconnect
+
+```
+
+The current active exchange is displayed in the terminal, using `disconnect` will disconnect the terminal from that exchange
 
 ---
 
@@ -241,9 +286,9 @@ _Note : For this command to work you need to have an open position on the active
 
 ---
 
-### **cancel [type_of_cancel]**
+### **cancel**
 
-This command cancel the recent limit orders for the current ticker
+This command cancel the recent limit orders, for the current active ticker
 
 ```sh
 > cancel
@@ -251,9 +296,50 @@ This command cancel the recent limit orders for the current ticker
 
 ---
 
+### **switch [bybit | binance]**
+
+This command will switch the current active exchange
+
+```sh
+> switch binance
+```
+
+Will switch current active exchange to Binance
+
+```sh
+> switch bybit
+```
+
+Will switch current active exchange to Bybit
+
+---
+
+### **position [action]**
+
+Available actions:
+
+- refresh
+
+This command list the current opened position for the current exchange, stored in the terminal
+
+```sh
+> position
+```
+
+Will list the current stored positions.  
+Positions are gathered using Websockets, every time you enter a position the terminal will add it to the position list
+
+```sh
+> position refresh
+```
+
+Adding the `refresh` action will force the terminal to call the current active exchange and refresh the position list
+
+---
+
 ### **shortcut [action] [shortcut_name]=[shortcut_value]**
 
-This command will do the `[action]` with `[shortcut_name]` and `[shortcut_value]` as parameter
+This command will execute the given `[action]` with `[shortcut_name]` and `[shortcut_value]` as parameter
 
 This command is usefull to add / modify shortcuts
 Available actions:
@@ -280,7 +366,7 @@ Now, when you type `tp10` in the terminal, it will execute `scale 4 0.5 0.9`
 
 ### **atp [atp_action] [shortcut_name]**
 
-This command will perform the `[atp_action]` with `[shortcut_name]` as parameter
+This command will execute the given `[atp_action]` with `[shortcut_name]` as parameter
 
 Actions availabe :
 
@@ -297,11 +383,11 @@ It means that if you take a trade on another pair, it will place the limit order
 
 ### **ON** example
 
-Considering we have the following shortcut file :
+Consider we have the following shortcut file :
 
 ```json
 {
-	"tp1" : scale 10 0.1 to 0.2 `
+  "tp1": "scale 10 0.1 to 0.2"
 }
 ```
 
@@ -309,17 +395,15 @@ Considering we have the following shortcut file :
 > atp ON tp1
 ```
 
-This will activate the autotp system with the shortcut `tp1` as limit order config
+This will activate the **_atp_** system with the shortcut `tp1` as limit order config
 
 It means, if we enter a position on any coin, the bot will execute `scale 10 0.1 to 0.2 `
 
 - It will automatically set 10 limit orders from 0.1 to 0.2 each time you enter a position
 
-_Note : Obviously, only use `scale` or `tp` shortcuts_ for atp command
-
-This will update the shortcut used by the `autotp` cmd to the shortcut called `tp4`
-
-_Note : shortcuts needs to be defined in the file located in shortcuts/shortcuts.json_
+_Note : Obviously, only use `scale` or `tp` shortcuts for atp command_
+_Note : Shortcuts needs to be defined in the file located shortcuts.json_
+_Note : To update a atp shortcut, use the ON action again_
 
 ### **OFF** example
 
