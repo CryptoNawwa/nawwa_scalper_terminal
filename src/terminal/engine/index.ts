@@ -72,7 +72,7 @@ export class Engine {
       const symbol = exchange.symbols.find(s => s.name === position.symbol);
 
       if (!symbol) {
-        throw new TerminalError(`ATP - Cannot find symbol ${position.symbol}`);
+        throw new TerminalError(`ATP - Symbol ${position.symbol} not available on exchange ${exchange.instance.type}`);
       }
 
       const common = { symbol, position, exchange, shouldLog: true };
