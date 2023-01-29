@@ -13,7 +13,7 @@ import { TerminalError } from '../../../_common/error';
 const numberOrStringToNumber = (data: number | string) => (typeof data === 'string' ? parseFloat(data) : data);
 
 export const toActiveOrder = (order: NewOrderResult): ActiveOrder => ({
-  orderId: order.orderId.toString(),
+  orderId: order.clientOrderId.toString(),
   symbol: order.symbol,
   from: SUPPORTED_EXCHANGE.binance,
 });
