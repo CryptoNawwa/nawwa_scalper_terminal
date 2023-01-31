@@ -21,10 +21,6 @@ const calculateOrderQuantities = (totalQuantity: number, numOrders: number, quan
   const orderQuantities = [];
   const singleOrderQuantity = Math.floor(totalQuantity / numOrders / quantityStep) * quantityStep;
   const remainingQuantity = totalQuantity - singleOrderQuantity * numOrders;
-  console.log('singleOrderQuantity : ', singleOrderQuantity);
-  console.log('remainingQuantity : ', remainingQuantity);
-  console.log('remainingQuantity / quantityStep : ', remainingQuantity / quantityStep);
-
   for (let i = 0; i < numOrders; i++) {
     if (i < remainingQuantity / quantityStep) {
       orderQuantities.push(singleOrderQuantity + quantityStep);
@@ -89,6 +85,7 @@ export const postScaleOrders = async ({
   });
 
   const createPostOrderPromises = [];
+  const logsArray = [];
   const step = (toPrice - fromPrice) / (numberOfOrder - 1);
 
   for (var i = 0; i < numberOfOrder; i++) {
@@ -103,12 +100,11 @@ export const postScaleOrders = async ({
       }),
     );
 
-    shouldLog &&
-      logger.grey(
-        `- order ${i + 1}/${numberOfOrder} sent to ${exchange.instance.type} at $${calculatedPrice} - qty ${
-          quantities[i]
-        } `,
-      );
+    logsArray.push(
+      `- order ${i + 1}/${numberOfOrder} sent to ${exchange.instance.type} at $${calculatedPrice} - qty ${
+        quantities[i]
+      } `,
+    );
   }
 
   const hrstart = process.hrtime();
@@ -118,6 +114,7 @@ export const postScaleOrders = async ({
   const errorResult = result.filter(r => isRefusal(r)) as ExchangeError[];
   const successResult = result.filter(r => isOk(r)) as ExchangeSuccess<ActiveOrder>[];
 
+  shouldLog && logger.grey(logsArray.join('\n'));
   errorResult.forEach(r => {
     shouldLog && logger.warn(`Failed to create limit order, reason: ${chalk.italic(r.message)}`);
   });
