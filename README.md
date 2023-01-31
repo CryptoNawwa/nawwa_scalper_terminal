@@ -4,18 +4,19 @@
 
 This CLI is a textual UI (TUI) terminal tool, it's goal is to automate certain action when you are trading / scalping, aka : place scale orders, auto-limit order, cancel orders, shortcuts..
 
-This repository is a re-write of the previous tool [nawwa-scalper-tool](https://github.com/CryptoNawwa/nawwa_scalper_tool) which was written in Python (meh).
+This repository is a re-write of the previous tool I made ([nawwa-scalper-tool](https://github.com/CryptoNawwa/nawwa_scalper_tool)) which was written in Python (meh).
 
-This version is fully written in Typescript 🚀
+This version is fully written in Typescript 🚀 and support the following exhanges:
 
-Also, the **Nawwa Scalper Termina** now supports the **Bybit** & **Binance** exchanges !
+- Binance ✅
+- Bybit ✅
 
 > Note: The code was made so it's easy for a developer to implement any new exchange
 
-#### Socials & Tip
+#### Socials & Tip Jar
 
-Twitter : [@crypto_nawwa](https://twitter.com/crypto_nawwa)
-Discord : **Nawwa#8129**
+Twitter : [@crypto_nawwa](https://twitter.com/crypto_nawwa)  
+Discord : **Nawwa#8129**  
 **_TIP JAR_**
 erc-20 : `0xc44823Cda133B49cb7F91B5cFa517FA76d3Ae561`
 
@@ -23,15 +24,7 @@ erc-20 : `0xc44823Cda133B49cb7F91B5cFa517FA76d3Ae561`
 
 Auto take profit system on Quantower
 
-![demo2](./img/ATP-command.gif)
-
-cancel and create orders
-
-![demo1](./img/gif_scale_cancel.gif)
-
-launch auto take profit
-
-![demo2](./img/gif_ticker_atp.gif)
+![atp](./assets/demo-auto-take-profit-system.gif)
 
 # Features
 
@@ -40,11 +33,11 @@ launch auto take profit
 - Display current active ticker & active exchange in terminal UI
 - Place scale reduce-only limit orders based on .% range away from entry
 - Place 1 (one) reduce only limit order, based on .% away from entry
-- **_Automatic take-profit_** system, on activation, the terminal will automatically place pre-configured scale or single order(s) whenever it detect a new position
+- **_Automatic take-profit_** system, on activation, the terminal will automatically place pre-configured scale or single order(s) whenever it detect a new position, on ANY symbols you trade
 - Cancellation of recent orders
-- Create/Update shortcuts (shortcuts = alias for your commands)
-- Terminal history (up and down arrows)
-- Terminal autocomplete (tab)
+- Create/Update shortcuts (shortcuts are alias for your commands)
+- CLI history (press up and down arrows)
+- CLI autocomplete (press tab)
 
 ### What I'm working on
 
@@ -63,9 +56,24 @@ You can download the `nawwa-scalper-terminal` app directly from here :
 - [MacOs](https://github.com/CryptoNawwa/nawwa_scalper_terminal/raw/main/bin/nawwa-scalper-terminal-macos)
 - [Linux](https://github.com/CryptoNawwa/nawwa_scalper_terminal/raw/main/bin/nawwa-scalper-terminal-linux) - (not tested yet)
 
-If you are familiar with our beloved friend [Ichibot](https://gitlab.com/Ichimikichiki/ichibot-client-app), this is just like it, I will shamelessly copy-past some of his instructions :
+**_Demo on how to install the app on windows:_**
+
+![demo_install](./assets/windows-how-to-install-the-terminal.gif)
+
+#### **Extra Steps on Windows**
+
+**Strongly recommended** : Install the terminal called [ Windows Terminal ](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701), the `nawwa-scalper-terminal` has some cool emojies and colors, they might not work in basic terminal.
+
+To launch the `nawwa-scalper-terminal`:
+
+- Just double click the app
+- However, if it opens and closes real quick :
+  - then open a cmd (terminal) window, and drag `nawwa-scalper-terminal-win.exe` and drop it into the black of the cmd (terminal) window
+  - can also open cmd window and type: `cd Desktop` (or wherever you put it) and then type: `nawwa-scalper-terminal-win.exe` to run it.
 
 #### **Extra Steps on MacOS or Linux**
+
+If you are familiar with our beloved friend [Ichibot](https://gitlab.com/Ichimikichiki/ichibot-client-app), this is just like it, I will shamelessly copy-past some of his instructions :
 
 Open a terminal and and navigate to wherever you put the `nawwa-scalper-terminal`
 
@@ -80,17 +88,6 @@ Then:
 - alternatively, type in your terminal: `./nawwa-scalper-terminal-macos`
   or for linux:
 - type: `./nawwa-scalper-terminal-linux`
-
-#### **Extra Steps on Windows**
-
-**Strongly recommended** : Install the terminal called [ Windows Terminal ](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701), the `nawwa-scalper-terminal` has some cool emojies and colors, they might not work in basic terminal.
-
-To launch the `nawwa-scalper-terminal`:
-
-- Just double click the app
-- However, if it opens and closes real quick :
-  - then open a cmd (terminal) window, and drag `nawwa-scalper-terminal-win.exe` and drop it into the black of the cmd (terminal) window
-  - can also open cmd window and type: `cd Desktop` (or wherever you put it) and then type: `nawwa-scalper-terminal-win.exe` to run it.
 
 ## Build from source yourself
 
