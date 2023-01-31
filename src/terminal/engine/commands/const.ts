@@ -15,7 +15,7 @@ import chalk from 'chalk';
 export const COMMAND_VALUES = {
   CONNECT: {
     name: 'CONNECT',
-    usage: 'connect <bybit | binance>',
+    usage: 'connect <bybit> or <binance>',
     description: `${chalk.italic("'connect binance'")} -> It will try to connect to binance`,
   },
   DISCONNECT: {

@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import _ from 'lodash';
 import { logger } from '../../../../logger';
 import type { ExchangeError, ExchangeSuccess } from '../../../exchanges';
 import { isOk, isRefusal } from '../../../exchanges/_common/result';
@@ -16,6 +17,25 @@ export type PostScaleOrdersParam = {
   shouldLog: boolean;
 };
 
+const calculateOrderQuantities = (totalQuantity: number, numOrders: number, quantityStep: number): number[] => {
+  const orderQuantities = [];
+  const singleOrderQuantity = Math.floor(totalQuantity / numOrders / quantityStep) * quantityStep;
+  const remainingQuantity = totalQuantity - singleOrderQuantity * numOrders;
+  console.log('singleOrderQuantity : ', singleOrderQuantity);
+  console.log('remainingQuantity : ', remainingQuantity);
+  console.log('remainingQuantity / quantityStep : ', remainingQuantity / quantityStep);
+
+  for (let i = 0; i < numOrders; i++) {
+    if (i < remainingQuantity / quantityStep) {
+      orderQuantities.push(singleOrderQuantity + quantityStep);
+    } else {
+      orderQuantities.push(singleOrderQuantity);
+    }
+  }
+
+  return orderQuantities.map(q => Number(q.toFixed(1)));
+};
+
 export const postScaleOrders = async ({
   symbol,
   position,
@@ -25,13 +45,12 @@ export const postScaleOrders = async ({
   toPercentage,
   shouldLog,
 }: PostScaleOrdersParam) => {
-  const maxSizePerOrder = symbol.lotSizeFilter.maxTradingQuantity;
-  const minSizePerOrder = symbol.lotSizeFilter.minTradingQuantity;
-  const quantityPerOrder =
-    Math.ceil(position.size / numberOfOrder / symbol.lotSizeFilter.quantityStep) * symbol.lotSizeFilter.quantityStep;
-  const rawQuantity = position.size / numberOfOrder;
+  const {
+    lotSizeFilter: { maxTradingQuantity: maxSizePerOrder, minTradingQuantity: minSizePerOrder, quantityStep },
+  } = symbol;
 
-  if (quantityPerOrder > maxSizePerOrder) {
+  const rawQuantity = position.size / numberOfOrder;
+  if (rawQuantity > maxSizePerOrder) {
     shouldLog &&
       logger.error(
         `Scaling not wide enought,augment your number of orders, max size per limit order : ${maxSizePerOrder}`,
@@ -47,6 +66,8 @@ export const postScaleOrders = async ({
 
     return false;
   }
+
+  const quantities = calculateOrderQuantities(position.size, numberOfOrder, quantityStep);
 
   const entryPrice = position.entry_price;
   const symbolTickSize = symbol.priceFilter.tickSize;
@@ -76,14 +97,18 @@ export const postScaleOrders = async ({
       exchange.instance.createPostLimitOrder({
         side: position.side === Side.LONG ? Side.SHORT : Side.LONG,
         symbol: position.symbol,
-        quantity: quantityPerOrder,
+        quantity: quantities[i],
         price: calculatedPrice,
         reduceOnly: true,
       }),
     );
 
     shouldLog &&
-      logger.grey(`- order ${i + 1}/${numberOfOrder} sent to ${exchange.instance.type} at $${calculatedPrice}`);
+      logger.grey(
+        `- order ${i + 1}/${numberOfOrder} sent to ${exchange.instance.type} at $${calculatedPrice} - qty ${
+          quantities[i]
+        } `,
+      );
   }
 
   const hrstart = process.hrtime();
@@ -106,7 +131,7 @@ export const postScaleOrders = async ({
       );
   }
 
-  logger.grey(`Request took ${(hrend[1] / 1000000).toFixed()}ms`);
+  logger.grey(`Request took ${(hrend[1] / 1000000).toFixed()}ms (roundtrip)`);
 
   exchange.currentActiveOrder = [...exchange.currentActiveOrder, ...successResult.map(r => r.data)];
   return true;

@@ -15,7 +15,7 @@ const logger = {
     console.log(chalk.blue(`${emoji.arrows_counterclockwise} ${msg}`));
   },
   info: (msg: string) => {
-    console.log(chalk.blue(`${emoji.arrow_right} ${msg}`));
+    console.log(chalk.blue(`${emoji.arrow_right}  ${msg}`));
   },
   warn: (msg: string) => {
     console.log(chalk.yellow(`${emoji.warning} ${msg}`));

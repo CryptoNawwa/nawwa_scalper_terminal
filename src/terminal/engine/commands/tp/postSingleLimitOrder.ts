@@ -49,7 +49,7 @@ export const postSingleLimitOrder = async ({
       }`,
     );
 
-  logger.grey(`Request took ${(hrend[1] / 1000000).toFixed()}ms`);
+  logger.grey(`Request took ${(hrend[1] / 1000000).toFixed()}ms (roundtrip)`);
 
   exchange.currentActiveOrder.push(result.data);
 
