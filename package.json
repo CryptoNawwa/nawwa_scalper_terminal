@@ -1,7 +1,7 @@
 {
   "name": "nawwa-scalper-terminal",
   "packageManager": "yarn@3.2.3",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "scripts": {
     "build": "NODE_ENV=production tsc -p tsconfig.build.json",
     "package": "yarn build && pkg .",

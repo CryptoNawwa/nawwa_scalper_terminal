@@ -18,18 +18,25 @@ export type PostScaleOrdersParam = {
 };
 
 const calculateOrderQuantities = (totalQuantity: number, numOrders: number, quantityStep: number): number[] => {
+  let remainingQuantity = totalQuantity;
+  const targetOrderSize = totalQuantity / numOrders;
   const orderQuantities = [];
-  const singleOrderQuantity = Math.floor(totalQuantity / numOrders / quantityStep) * quantityStep;
-  const remainingQuantity = totalQuantity - singleOrderQuantity * numOrders;
+
   for (let i = 0; i < numOrders; i++) {
-    if (i < remainingQuantity / quantityStep) {
-      orderQuantities.push(singleOrderQuantity + quantityStep);
-    } else {
-      orderQuantities.push(singleOrderQuantity);
-    }
+    const roundedOrderSize = Math.round(targetOrderSize / quantityStep) * quantityStep;
+    orderQuantities.push(roundedOrderSize);
+    remainingQuantity -= roundedOrderSize;
   }
 
-  return orderQuantities.map(q => Number(q.toFixed(1)));
+  let i = 0;
+  while (remainingQuantity > 0) {
+    orderQuantities[i % numOrders] += quantityStep;
+    remainingQuantity -= quantityStep;
+    i++;
+  }
+
+  const decimalPlaces = (quantityStep.toString().split('.')[1] || []).length;
+  return orderQuantities.map(q => Number(q.toFixed(decimalPlaces)));
 };
 
 export const postScaleOrders = async ({

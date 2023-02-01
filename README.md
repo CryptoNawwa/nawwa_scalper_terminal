@@ -1,4 +1,4 @@
-# Nawwa Scalper Terminal
+![nawwa-scaler-terminal-image](./assets/nawwa_scalper_terminal_bybit.png)
 
 ####
 
@@ -22,7 +22,7 @@ erc-20 : `0xc44823Cda133B49cb7F91B5cFa517FA76d3Ae561`
 
 # Demo
 
-Auto take profit system on Quantower
+Auto take profit system on Binance & Quantower
 
 ![atp](./assets/demo-auto-take-profit-system.gif)
 
