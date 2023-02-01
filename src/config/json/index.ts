@@ -10,6 +10,7 @@ export interface Json {
 
 const JSONSyncErrorReason = {
   CANNOT_CREATE_FILE: 'CANNOT_CREATE_FILE',
+  CANNOT_DELETE_KEY: 'CANNOT_DELETE_KEY',
   CANNOT_UPDATE_FILE: 'CANNOT_UPDATE_FILE',
 };
 
@@ -35,6 +36,17 @@ export class JSONSync {
 
   public getData() {
     return this.data;
+  }
+
+  public delete(toDelete: string) {
+    try {
+      delete this.data[toDelete];
+
+      fs.writeFileSync(this.path, JSON.stringify(this.data));
+    } catch (err) {
+      logger.error(`Cannot not delete '${toDelete}' shortcut`);
+      throw new TerminalError(JSONSyncErrorReason.CANNOT_DELETE_KEY);
+    }
   }
 
   public new(newData: Json) {

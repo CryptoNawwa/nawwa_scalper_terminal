@@ -67,11 +67,11 @@ export class Bybit implements Exchange {
       return refuse('Problem with bybit API');
     }
 
-    if (result.ret_msg == 'OK' && result.result) {
+    if (result.ret_code == 0 && result.result) {
       return ok<ActiveOrder>(toActiveOrder(result.result));
     }
 
-    return refuse(result.ret_msg);
+    return refuse(`${result.ret_msg} - code: ${result.ext_code ?? 'unknown'}`);
   }
 
   public async connectToRestClient() {
@@ -107,7 +107,7 @@ export class Bybit implements Exchange {
 
     if (positionsResult.ret_msg !== 'OK') {
       throw new TerminalError(BybitErrorReason.RET_CODE_NOK, {
-        origin: 'loadCurrentPosition',
+        origin: 'fetchCurrentPositions',
         code: positionsResult.ret_code,
         msg: positionsResult.ret_msg,
       });

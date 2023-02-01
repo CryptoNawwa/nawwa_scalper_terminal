@@ -38,9 +38,15 @@ export const COMMAND_VALUES = {
   },
   SHORTCUT: {
     name: 'SHORTCUT',
-    usage: ['shortcut add <shortcut_name>=<shortcut_value>', 'shortcut list', 'shortcut load'],
+    usage: [
+      'shortcut add <shortcut_name>=<shortcut_value>',
+      'shortcut del <shortcut_name>',
+      'shortcut list',
+      'shortcut load',
+    ],
     description: [
       `${chalk.italic("'shortcut add p=position'")} -> Will add the shortcut 'p' to the value 'position'`,
+      `${chalk.italic("'shortcut del tp1'")} -> Will delete the shortcut called 'tp1' `,
       `${chalk.italic("'shortcut load'")} -> Will reload the shortcut file`,
       `${chalk.italic("'shortcut list'")} -> Will list the available shortcuts`,
     ],

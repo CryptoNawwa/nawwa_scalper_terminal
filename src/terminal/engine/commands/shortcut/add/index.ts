@@ -3,7 +3,7 @@ import { printUsage } from '../index';
 import type { Engine } from '../../../index';
 
 const printErrorAndUsage = () => {
-  logger.error(`Wrong argument for 'list add' command`);
+  logger.error(`Wrong argument for 'shortcut add' command`);
   printUsage();
 };
 

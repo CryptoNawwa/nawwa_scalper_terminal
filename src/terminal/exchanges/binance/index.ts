@@ -77,7 +77,7 @@ export class Binance implements Exchange {
       }
 
       if (instanceOfNewOrderError(result)) {
-        return refuse(result.msg);
+        return refuse(`${result.msg} - code: ${result.code.toString()}`);
       }
 
       return ok<ActiveOrder>(toActiveOrder(result));
