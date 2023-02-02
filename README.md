@@ -22,9 +22,15 @@ erc-20 : `0xc44823Cda133B49cb7F91B5cFa517FA76d3Ae561`
 
 # Demo
 
-Auto take profit system on Binance & Quantower
+Auto take profit system on Binance  
 
-![atp](./assets/demo-auto-take-profit-system.gif)
+https://user-images.githubusercontent.com/113562325/216424210-fb78d369-9967-427e-9d82-d8858f6243b7.mp4
+
+Switch between Binance & Bybit  
+
+https://user-images.githubusercontent.com/113562325/216424414-af4415cd-c5c9-4c7d-bc4c-afa07a9ff00e.mp4
+
+
 
 # Features
 
