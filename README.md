@@ -64,7 +64,10 @@ You can download the `nawwa-scalper-terminal` app directly from here :
 
 **_Demo on how to install the app on windows:_**
 
-![demo_install](./assets/windows-how-to-install-the-terminal.gif)
+
+https://user-images.githubusercontent.com/113562325/216447683-6e92e584-52f9-4ecd-8049-33913ad33024.mp4
+
+
 
 #### **Extra Steps on Windows**
 
