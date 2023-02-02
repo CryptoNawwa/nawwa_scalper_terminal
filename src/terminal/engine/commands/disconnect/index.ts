@@ -19,6 +19,7 @@ export const disconnect = async (args: string[], engine: Engine) => {
     logger.error(`${ERROR_CMD_MSG} No current active exchange.`);
     return false;
   }
+  engine.turnAutoTpOff();
 
   const exchangeType = activeExchange.instance.type;
 

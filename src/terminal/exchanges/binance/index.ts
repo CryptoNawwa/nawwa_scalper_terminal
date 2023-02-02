@@ -90,7 +90,6 @@ export class Binance implements Exchange {
   private webSocketUpdateReceive = async (data: WsUserDataEvents) => {
     if (data.eventType == 'ACCOUNT_UPDATE') {
       if (!this.enginePositionUpdateCallback) return;
-
       await this.enginePositionUpdateCallback(
         SUPPORTED_EXCHANGE.binance,
         data.updateData.updatedPositions.map(p => wsToPosition(p)),

@@ -10,8 +10,7 @@ export const off = (engine: Engine) => {
     return false;
   }
 
-  exchange.autoTakeProfit = undefined;
-  engine.promptTextTemplate.atpActive = undefined;
+  engine.turnAutoTpOff();
 
   logger.info(`AutoTakeProfit system is now [${chalk.red('OFF')}] for ${chalk.bold(exchange.instance.type)}.`);
   return true;

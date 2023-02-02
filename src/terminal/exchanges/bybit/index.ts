@@ -122,10 +122,8 @@ export class Bybit implements Exchange {
 
   private async webSocketUpdateReceive(websocketResult: WebSocketUpdate) {
     const topic = websocketResult.topic;
-
     if (topic === 'position') {
       if (!this.enginePositionUpdateCallback) return;
-
       await this.enginePositionUpdateCallback(
         SUPPORTED_EXCHANGE.bybit,
         (websocketResult.data as WebSocketPosition[]).map(p => wsToPosition(p)),

@@ -98,7 +98,10 @@ export class Engine {
   }
 
   private async callbackPositionUpdated(from: SUPPORTED_EXCHANGE, updatedPositions: Position[]) {
-    if (this.activeExchange !== from) return;
+    if (this.activeExchange !== from) {
+      logger.grey(`Received websocket update from '${from}' but ignored since it's not the current active exchange`);
+      return;
+    }
     const activeExchange = this.exchanges[from];
     if (!activeExchange) {
       logger.error(`Error in websocket callback from exchange ${from}`);
@@ -109,18 +112,29 @@ export class Engine {
     const saveCurrentPos = [...activeExchange.currentPositions];
     activeExchange.currentPositions = filteredPositions;
 
-    if (activeExchange.autoTakeProfit) {
-      const newPositions = filteredPositions.filter(p => {
-        const existing = saveCurrentPos.find(cp => cp.symbol === p.symbol);
-        if (!existing || p.size > existing.size) return true;
+    if (!activeExchange.autoTakeProfit) return;
 
-        return false;
-      });
+    const newPositions = filteredPositions.filter(p => {
+      const existing = saveCurrentPos.find(cp => cp.symbol === p.symbol);
+      if (!existing || p.size > existing.size) return true;
 
-      if (newPositions.length) {
-        await this.doAutoTakeProfitSytem(newPositions, activeExchange, activeExchange.autoTakeProfit);
-      }
+      return false;
+    });
+
+    if (newPositions.length) {
+      await this.doAutoTakeProfitSytem(newPositions, activeExchange, activeExchange.autoTakeProfit);
     }
+  }
+
+  public turnAutoTpOff() {
+    const exchange = this.getCurrentActiveExchange();
+    if (!exchange) {
+      logger.error(`No active exchange.`);
+      return false;
+    }
+
+    exchange.autoTakeProfit = undefined;
+    this.promptTextTemplate.atpActive = undefined;
   }
 
   public switchActiveExchange(switchTo: SUPPORTED_EXCHANGE) {
@@ -143,6 +157,7 @@ export class Engine {
     this.promptTextTemplate.activeExchangeName = switchTo;
     this.promptTextTemplate.activeSymbol = undefined;
 
+    this.turnAutoTpOff();
     logger.log(`Active exchange is now: ${switchTo}`);
   }
 
