@@ -61,7 +61,6 @@ export class Engine {
 
       const [newApiKey, newApiSecret] = result;
 
-      console.log(newApiKey, newApiSecret);
       exchange.config.new({ apiKey: newApiKey, apiSecret: newApiSecret });
     }
   }
